@@ -14,6 +14,7 @@ func Batcher(slice []interface{}, count int64) (c chan interface{}) {
 		var i int64
 
 		for _, item := range slice {
+			batch = append(batch, item)
 			i++
 			if i%count == 0 {
 
@@ -21,9 +22,6 @@ func Batcher(slice []interface{}, count int64) (c chan interface{}) {
 				batch = nil
 
 			}
-
-			batch = append(batch, item)
-
 		}
 
 		close(c)
